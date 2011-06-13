@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:Temp.cpp">
+   </FileRef>
+   <FileRef
+      location = "group:Temp.h">
+   </FileRef>
+   <Group
+      location = "container:"
+      name = "New Group">
+      <FileRef
+         location = "group:../DramSim2">
+      </FileRef>
+   </Group>
+   <FileRef
+      location = "group:">
+   </FileRef>
+</Workspace>
