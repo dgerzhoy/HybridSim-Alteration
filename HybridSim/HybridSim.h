@@ -52,17 +52,17 @@ namespace HybridSim
 			    TransactionCompleteCB *readDone,
 			    TransactionCompleteCB *writeDone);
 			void reportPower();
+            struct const_trans {
+                uint64_t addr;
+                bool isWrite;
+                uint64_t delay_counter;
+            };
+            list<const_trans> const_trans_queue;
+            static uint64_t NUM_CYCLES;
+        
 		void printLogfile();
         
-        struct const_trans {
-            uint64_t addr;
-            bool isWrite;
-            uint64_t delay_counter;
-        };
-        
-        list<const_trans> const_trans_queue;
-        
-        static uint64_t NUM_CYCLES = 1;
+    
 	};
 	HybridSystem *getMemorySystemInstance(uint id);
 

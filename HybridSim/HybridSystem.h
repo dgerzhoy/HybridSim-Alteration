@@ -147,7 +147,7 @@ namespace HybridSim
         
         list<const_trans> const_trans_queue;
         
-        static uint64_t NUM_CYCLES = 1;
+        uint64_t NUM_CYCLES;
 
 	};
 

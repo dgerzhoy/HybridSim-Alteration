@@ -111,7 +111,7 @@ namespace HybridSim {
             {
                 
                 
-                if (((*it).iswrite == true)) {
+                if (((*it).isWrite == true)) {
                     
                     DRAMWriteCallback(systemID, (*it).addr, currentClockCycle);
                 }
@@ -119,7 +119,7 @@ namespace HybridSim {
                     DRAMReadCallback(systemID, (*it).addr, currentClockCycle);
                 }
                 
-                const_trans_queue.erase(*it);
+                const_trans_queue.erase(it);
                 
             }
         }
@@ -130,12 +130,13 @@ namespace HybridSim {
 	
     bool HybridSystem::addTransaction(bool isWrite, uint64_t addr)
     {
+        NUM_CYCLES = 1;
         
         const_trans t;
         
         t.isWrite = isWrite;
         t.addr = addr;
-        t.delay_counter = N ;
+        t.delay_counter = NUM_CYCLES;
         
         
         const_trans_queue.push_back(t);
