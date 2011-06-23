@@ -103,24 +103,30 @@ namespace HybridSim {
 
     void HybridSystem::update()
     {
+        
+        
         for(list<const_trans>::iterator it = const_trans_queue.begin(); it !=const_trans_queue.end(); ++it)
         {
-            (*it).delay_counter--;
+            
+            
+            if((*it).delay_counter != 0){
+              
+                (*it).delay_counter--;
+            }
             
             if((*it).delay_counter == 0)
             {
-                
-                
-                if (((*it).isWrite == true)) {
+                if (((*it).isWrite == true)) {                
                     
-                    DRAMWriteCallback(systemID, (*it).addr, currentClockCycle);
+                    WriteDoneCallback(systemID, (*it).addr, currentClockCycle);
                 }
                 else {
-                    DRAMReadCallback(systemID, (*it).addr, currentClockCycle);
+                    
+                    ReadDoneCallback(systemID, (*it).addr, currentClockCycle);
                 }
                 
                 const_trans_queue.erase(it);
-                
+                break;
             }
         }
         
@@ -141,26 +147,10 @@ namespace HybridSim {
         
         const_trans_queue.push_back(t);
         
+        
         return true;
     }
 
-	bool HybridSystem::addTransaction(DRAMSim::Transaction &trans)
-	{
-
-		pending_count += 1;
-
-		//cout << "enter HybridSystem::addTransaction\n";
-		trans_queue.push_back(trans);
-		//cout << "pushed\n";
-
-		// Start the logging for this access.
-		log.access_start(trans.address);
-
-		// Restart queue checking.
-		this->check_queue = true;
-
-		return true; // TODO: Figure out when this could be false.
-	}
 
 	bool HybridSystem::WillAcceptTransaction()
 	{
@@ -853,7 +843,7 @@ namespace HybridSim {
 		}
 
 		// Finish the logging for this access.
-		log.access_stop(orig_addr);
+		//log.access_stop(orig_addr);
 	}
 
 
@@ -866,7 +856,7 @@ namespace HybridSim {
 		}
 
 		// Finish the logging for this access.
-		log.access_stop(orig_addr);
+		//log.access_stop(orig_addr);
 	}
 
 
